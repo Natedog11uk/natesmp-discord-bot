@@ -53,6 +53,8 @@ async def on_ready():
     )
 
     print("PRESENCE: online set successfully", flush=True)
+    print(f"BOT STATUS OBJECT: {bot.status}", flush=True)
+    print(f"BOT ACTIVITY: {bot.activity}", flush=True)
 
 
 @bot.command()
