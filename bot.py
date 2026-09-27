@@ -1,5 +1,6 @@
 import os
 import threading
+import asyncio
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 import discord
