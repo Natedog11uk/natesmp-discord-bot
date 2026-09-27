@@ -24,9 +24,94 @@ class HealthHandler(BaseHTTPRequestHandler):
             b"NateSMP AntiCheat bot is online!"
         )
 
+    def do_POST(self):
+
+        if self.path != "/anticheat/case":
+            self.send_response(404)
+            self.end_headers()
+            return
+
+        provided_key = self.headers.get(
+            "X-AntiCheat-Key"
+        )
+
+        if provided_key != ANTICHEAT_API_KEY:
+            self.send_response(401)
+            self.end_headers()
+            return
+
+        try:
+            length = int(
+                self.headers.get(
+                    "Content-Length",
+                    "0"
+                )
+            )
+
+            body = self.rfile.read(length)
+
+            import json
+
+            data = json.loads(
+                body.decode("utf-8")
+            )
+
+            required = [
+                "case_id",
+                "player",
+                "detection",
+                "severity",
+                "confidence",
+                "evidence",
+                "action"
+            ]
+
+            if not all(
+                key in data
+                for key in required
+            ):
+                self.send_response(400)
+                self.end_headers()
+                return
+
+            future = asyncio.run_coroutine_threadsafe(
+                create_anticheat_case(
+                    case_id=str(data["case_id"]),
+                    player=str(data["player"]),
+                    detection=str(data["detection"]),
+                    severity=str(data["severity"]),
+                    confidence=int(data["confidence"]),
+                    evidence=str(data["evidence"]),
+                    action=str(data["action"])
+                ),
+                bot.loop
+            )
+
+            future.result(timeout=10)
+
+            self.send_response(200)
+            self.send_header(
+                "Content-Type",
+                "application/json"
+            )
+            self.end_headers()
+
+            self.wfile.write(
+                b'{"success":true}'
+            )
+
+        except Exception as e:
+
+            print(
+                f"Anti-cheat API error: {e}",
+                flush=True
+            )
+
+            self.send_response(500)
+            self.end_headers()
+
     def log_message(self, format, *args):
         pass
-
 
 def start_web_server():
 
