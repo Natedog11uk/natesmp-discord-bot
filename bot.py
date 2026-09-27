@@ -1,5 +1,6 @@
 import os
 import threading
+import asyncio
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 import discord
@@ -60,6 +61,8 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
+    await asyncio.sleep(5)
+
     await bot.change_presence(
         status=discord.Status.online,
         activity=discord.Game(name="NateSMP AntiCheat")
