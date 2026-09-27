@@ -62,8 +62,7 @@ bot = commands.Bot(
 async def on_ready():
     await bot.change_presence(
         status=discord.Status.online,
-        activity=discord.Game(name="NateSMP AntiCheat"),
-        afk=False
+        activity=discord.Game(name="NateSMP AntiCheat")
     )
 
 
