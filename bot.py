@@ -60,14 +60,18 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user}")
+    bot_logger = bot.get_cog("Logger")
 
     await bot.change_presence(
         status=discord.Status.online,
         activity=discord.Game(name="NateSMP AntiCheat")
     )
 
-    print("Presence set to ONLINE.")
+    print("================================")
+    print(f"BOT READY: {bot.user}")
+    print(f"BOT IS READY: {bot.is_ready()}")
+    print("PRESENCE SET TO ONLINE")
+    print("================================")
 
 
 @bot.command()
