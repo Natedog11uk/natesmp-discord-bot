@@ -63,4 +63,3 @@ async def ping(ctx):
 print("STARTING DISCORD BOT...", flush=True)
 
 bot.run(TOKEN)
-```
