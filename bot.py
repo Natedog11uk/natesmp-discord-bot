@@ -64,6 +64,7 @@ if not TOKEN:
 ANTICHEAT_CHANNEL_ID = 1553820612328300554
 
 APPEAL_LINK = "https://discord.gg/P8HyYh5BbC"
+ANTICHEAT_API_KEY = os.getenv("ANTICHEAT_API_KEY")
 
 
 intents = discord.Intents.default()
