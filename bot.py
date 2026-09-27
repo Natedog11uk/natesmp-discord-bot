@@ -60,13 +60,14 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
+    print(f"Logged in as {bot.user}")
+
     await bot.change_presence(
         status=discord.Status.online,
-        activity=discord.Game("NateSMP AntiCheat")
+        activity=discord.Game(name="NateSMP AntiCheat")
     )
 
-    print(f"Logged in as {bot.user}")
-    print("NateSMP AntiCheat Discord bot is online.")
+    print("Presence set to ONLINE.")
 
 
 @bot.command()
