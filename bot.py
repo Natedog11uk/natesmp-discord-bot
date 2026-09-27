@@ -79,4 +79,5 @@ async def ping(ctx):
     await ctx.send("NateSMP AntiCheat is online!")
 
 
+print("STARTING NATESMP BOT...")
 bot.run(TOKEN)
