@@ -76,7 +76,7 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send("NateSMP AntiCheat is online!")
+    await ctx.send("NateSMP AntiCheat is online! and not 67!")
 
 
 print("STARTING NATESMP BOT...")
